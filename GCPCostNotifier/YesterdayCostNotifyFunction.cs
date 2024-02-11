@@ -12,6 +12,6 @@ public class YesterdayCostNotifyFunction(ICostQueryService costQueryService, ISl
         var tokyoTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Tokyo");
         var targetDateTimeOffset = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tokyoTimeZone);
         var results = await costQueryService.GetYesterdayCostSummaryAsync(targetDateTimeOffset, cancellationToken);
-        await slackNotifier.NotifyDailyResult(results, cancellationToken);
+        await slackNotifier.NotifyDailyResultAsync(results, cancellationToken);
     }
 }

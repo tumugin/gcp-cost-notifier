@@ -6,7 +6,7 @@ using Slack.Webhooks;
 public class SlackNotifier(string slackWebhookUrl, HttpClient httpClient, ILogger<SlackNotifier> logger)
     : ISlackNotifier
 {
-    public async Task NotifyDailyResult(IList<CostSummary> costSummaries, CancellationToken cancellationToken)
+    public async Task NotifyDailyResultAsync(IList<CostSummary> costSummaries, CancellationToken cancellationToken)
     {
         using var slackClient = new SlackClient(slackWebhookUrl, httpClient: httpClient);
         var totalCost = decimal.Ceiling(costSummaries.Select(v => v.SummarizedCost).Sum());
