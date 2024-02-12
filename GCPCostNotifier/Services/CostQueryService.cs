@@ -26,12 +26,12 @@ public class CostQueryService(string projectId, string targetTableName, ILogger<
         var partitionEndDateTimeUtc = endOffsetDateTime.ToOffsetDateTime().InZone(DateTimeZone.Utc);
 
         var query =
-            @"
+            @$"
 SELECT
     service.description AS ServiceName,
     sku.description AS ServiceDescription,
     SUM(cost + IFNULL((SELECT SUM(c.amount) FROM UNNEST(credits) AS c), 0.0)) AS SummarizedCost
-FROM @targetTableName
+FROM `{targetTableName}`
 WHERE
     _PARTITIONTIME BETWEEN @partitionStartDateTime AND @partitionEndDateTime AND
     usage_start_time >= @startDateTime AND usage_end_time <= @endDateTime
@@ -47,9 +47,10 @@ ORDER BY ServiceName, ServiceDescription";
             query,
             new[]
             {
-                new BigQueryParameter("targetTableName", BigQueryDbType.String, targetTableName), new BigQueryParameter(
+                new BigQueryParameter(
                     "partitionStartDateTime", BigQueryDbType.Timestamp,
-                    partitionStartDateTimeUtc.ToDateTimeOffset()),
+                    partitionStartDateTimeUtc.ToDateTimeOffset()
+                ),
                 new BigQueryParameter("partitionEndDateTime", BigQueryDbType.Timestamp,
                     partitionEndDateTimeUtc.ToDateTimeOffset()),
                 new BigQueryParameter("startDateTime", BigQueryDbType.Timestamp,
@@ -80,6 +81,7 @@ ORDER BY ServiceName, ServiceDescription";
                 decimal.Parse(
                     v["SummarizedCost"].ToString() ??
                     throw new InvalidOperationException("SummarizedCost should not be null."),
+                    NumberStyles.Float,
                     NumberFormatInfo.InvariantInfo
                 )
         }).ToArray();

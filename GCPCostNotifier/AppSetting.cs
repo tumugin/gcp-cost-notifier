@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 public class AppSetting
 {
-    [Required] public string ProjectId { get; private set; } = null!;
+    [Required] public required string ProjectId { get; init; }
 
-    [Required] public string TargetTableName { get; private set; } = null!;
+    [Required] public required string TargetTableName { get; init; }
 
-    [Required] public string SlackWebhookUrl { get; private set; } = null!;
+    [Required] public required string SlackWebhookUrl { get; init; }
 }

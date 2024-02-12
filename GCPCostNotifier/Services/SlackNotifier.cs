@@ -14,23 +14,25 @@ public class SlackNotifier(string slackWebhookUrl, HttpClient httpClient, ILogge
         Log.SendingSlackMessage(logger);
         await slackClient.PostAsync(new SlackMessage
         {
-            // まゆりちゃんかわいいね...(Twitterアイコン)
-            IconUrl = new Uri("https://pbs.twimg.com/profile_images/1719370833620283392/FhWAjCgD_400x400.jpg"),
             // 作者は仔羽まゆりではないので想像で書いてある。実態はただの限界オタクが想像で書いたものである。
-            Text = "** :white_heart: まゆりちゃんが昨日のGCPのコストをお知らせします :white_heart: **\n" +
-                   $"昨日のGCPのコストは ** {totalCost.ToJpyStyleString()}円 ** だよ！！\n" +
+            Text = "*:white_heart: まゆりちゃんが昨日のGCPのコストをお知らせします :white_heart:*\n" +
+                   $"昨日のGCPのコストは *{totalCost.ToJpyStyleString()}* だよ！！\n" +
                    "お金使いすぎないで欲しいな！",
             Markdown = true,
             Attachments =
             [
                 new SlackAttachment()
                 {
-                    Text = "昨日のGCPのコストの詳細だよ！",
-                    Fields = costSummaries.Select(v => new SlackField
-                    {
-                        Title = $"{v.ServiceName} - {v.ServiceDescription}",
-                        Value = v.SummarizedCost.ToJpyStyleString() + "円",
-                    }).ToList(),
+                    Text = "昨日のGCPのコストの詳細だよ！（1円未満のものは省略したよ！）",
+                    Footer = "コストを計算する仔羽まゆりちゃん",
+                    Fields = costSummaries
+                        .Where(v => v.SummarizedCost >= 1.0m)
+                        .Select(v => new SlackField
+                        {
+                            Title = $"{v.ServiceName} - {v.ServiceDescription}",
+                            Value = v.SummarizedCost.ToJpyStyleString(),
+                        })
+                        .ToList(),
                     Color = "#ADE0EE"
                 }
             ]
