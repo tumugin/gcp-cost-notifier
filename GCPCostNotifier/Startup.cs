@@ -17,6 +17,7 @@ public class Startup : FunctionsStartup
         var appSettings = context.Configuration.GetSection("AppSettings").Get<AppSetting>()
                           ?? throw new InvalidOperationException("AppSettings is not configured.");
         services
+            .AddHttpClient()
             .AddScoped<ICostQueryService, CostQueryService>(v => new CostQueryService(
                 appSettings.ProjectId,
                 appSettings.TargetTableName,
