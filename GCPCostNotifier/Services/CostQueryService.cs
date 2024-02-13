@@ -13,10 +13,11 @@ public class CostQueryService(
 {
     public async Task<IList<CostSummary>> GetYesterdayCostSummaryAsync(
         DateTimeOffset targetDateTimeOffset,
+        TimeZoneInfo targetTimeZoneInfo,
         CancellationToken cancellationToken
     )
     {
-        var calculatedDateTimes = dateTimeCalculationService.CalculateDateTimeOffsetsForYesterday(targetDateTimeOffset);
+        var calculatedDateTimes = dateTimeCalculationService.CalculateDateTimeOffsetsForYesterday(targetDateTimeOffset, targetTimeZoneInfo);
 
         var query =
             @$"

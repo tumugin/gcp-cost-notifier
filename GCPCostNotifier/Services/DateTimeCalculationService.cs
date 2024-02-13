@@ -5,11 +5,14 @@ using NodaTime.Extensions;
 
 public class DateTimeCalculationService : IDateTimeCalculationService
 {
-    public CalculatedDateTimeOffsets CalculateDateTimeOffsetsForYesterday(DateTimeOffset targetDateTimeOffset)
+    public CalculatedDateTimeOffsets CalculateDateTimeOffsetsForYesterday(
+        DateTimeOffset targetDateTimeOffset,
+        TimeZoneInfo targetTimeZoneInfo
+    )
     {
         // 基準日は必ず現在の日付の0時0分0秒にする
         var targetZonedDateTime = targetDateTimeOffset.ToZonedDateTime();
-        var referenceDateTime = targetZonedDateTime.Date.AtStartOfDayInZone(targetZonedDateTime.Zone);
+        var referenceDateTime = targetZonedDateTime.Date.AtStartOfDayInZone(DateTimeZoneProviders.Tzdb[targetTimeZoneInfo.Id]);
 
         // 開始日はぴったり1日前の日時に指定、終了日は指定された日時にする
         var startOffsetDateTime = referenceDateTime.Plus(Duration.Negate(Duration.FromDays(1)));

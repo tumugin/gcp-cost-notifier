@@ -22,7 +22,11 @@ public class YesterdayCostNotifyFunction(
             losAngelesTimeZone.Id,
             losAngelesTimeZone.IsDaylightSavingTime(targetDateTimeOffset)
         );
-        var results = await costQueryService.GetYesterdayCostSummaryAsync(targetDateTimeOffset, cancellationToken);
+        var results = await costQueryService.GetYesterdayCostSummaryAsync(
+            targetDateTimeOffset,
+            losAngelesTimeZone,
+            cancellationToken
+        );
         await slackNotifier.NotifyDailyResultAsync(results, cancellationToken);
     }
 }
