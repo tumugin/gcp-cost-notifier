@@ -4,6 +4,12 @@ using Microsoft.Extensions.Logging;
 
 public static partial class Log
 {
+    [LoggerMessage(
+        message: "Triggered function. The target timezone is `{timezone}` and IsDaylightSavingTime is `{isDaylightSavingTime}`",
+        level: LogLevel.Information
+    )]
+    public static partial void TriggeredFunction(ILogger logger, string timeZone, bool isDaylightSavingTime);
+
     [LoggerMessage(message: "Initializing BigQuery client.", level: LogLevel.Information)]
     public static partial void InitializingBigQueryClient(ILogger logger);
 
