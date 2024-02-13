@@ -3,27 +3,21 @@ namespace GCPCostNotifier.Services;
 using System.Globalization;
 using Google.Cloud.BigQuery.V2;
 using Microsoft.Extensions.Logging;
-using NodaTime;
-using NodaTime.Extensions;
 
-public class CostQueryService(string projectId, string targetTableName, ILogger<CostQueryService> logger)
-    : ICostQueryService
+public class CostQueryService(
+    string projectId,
+    string targetTableName,
+    IDateTimeCalculationService dateTimeCalculationService,
+    ILogger<CostQueryService> logger
+) : ICostQueryService
 {
-    public async Task<IList<CostSummary>> GetYesterdayCostSummaryAsync(DateTimeOffset targetDateTimeOffset,
-        CancellationToken cancellationToken)
+    public async Task<IList<CostSummary>> GetYesterdayCostSummaryAsync(
+        DateTimeOffset targetDateTimeOffset,
+        TimeZoneInfo targetTimeZoneInfo,
+        CancellationToken cancellationToken
+    )
     {
-        // 基準日は必ず現在の日付の0時0分0秒にする
-        var targetZonedDateTime = targetDateTimeOffset.ToZonedDateTime();
-        var referenceDateTime = targetZonedDateTime.Date.AtStartOfDayInZone(targetZonedDateTime.Zone);
-
-        // 開始日はぴったり1日前の日時に指定、終了日は指定された日時にする
-        var startOffsetDateTime = referenceDateTime.Plus(Duration.Negate(Duration.FromDays(1)));
-        var endOffsetDateTime = referenceDateTime;
-
-        // パーティションの日付は開始日はUTCに変換した日付の0時0分0秒、終了日は指定された日時にする
-        var partitionStartDateTimeUtc =
-            startOffsetDateTime.ToOffsetDateTime().InZone(DateTimeZone.Utc).Date.AtStartOfDayInZone(DateTimeZone.Utc);
-        var partitionEndDateTimeUtc = endOffsetDateTime.ToOffsetDateTime().InZone(DateTimeZone.Utc);
+        var calculatedDateTimes = dateTimeCalculationService.CalculateDateTimeOffsetsForYesterday(targetDateTimeOffset, targetTimeZoneInfo);
 
         var query =
             @$"
@@ -42,20 +36,35 @@ ORDER BY ServiceName, ServiceDescription";
         Log.InitializingBigQueryClient(logger);
         using var bqClient = await BigQueryClient.CreateAsync(projectId);
 
-        Log.CreatingQueryJob(logger, startOffsetDateTime.ToDateTimeOffset(), endOffsetDateTime.ToDateTimeOffset());
+        Log.CreatingQueryJob(
+            logger,
+            calculatedDateTimes.StartOffsetDateTimeOffset,
+            calculatedDateTimes.EndOffsetDateTimeOffset
+        );
         var job = await bqClient.CreateQueryJobAsync(
             query,
             new[]
             {
                 new BigQueryParameter(
-                    "partitionStartDateTime", BigQueryDbType.Timestamp,
-                    partitionStartDateTimeUtc.ToDateTimeOffset()
+                    "partitionStartDateTime",
+                    BigQueryDbType.Timestamp,
+                    calculatedDateTimes.PartitionStartDateTimeOffset
                 ),
-                new BigQueryParameter("partitionEndDateTime", BigQueryDbType.Timestamp,
-                    partitionEndDateTimeUtc.ToDateTimeOffset()),
-                new BigQueryParameter("startDateTime", BigQueryDbType.Timestamp,
-                    startOffsetDateTime.ToDateTimeOffset()),
-                new BigQueryParameter("endDateTime", BigQueryDbType.Timestamp, endOffsetDateTime.ToDateTimeOffset())
+                new BigQueryParameter(
+                    "partitionEndDateTime",
+                    BigQueryDbType.Timestamp,
+                    calculatedDateTimes.PartitionEndDateTimeOffset
+                ),
+                new BigQueryParameter(
+                    "startDateTime",
+                    BigQueryDbType.Timestamp,
+                    calculatedDateTimes.StartOffsetDateTimeOffset
+                ),
+                new BigQueryParameter(
+                    "endDateTime",
+                    BigQueryDbType.Timestamp,
+                    calculatedDateTimes.EndOffsetDateTimeOffset
+                )
             },
             cancellationToken: cancellationToken
         );

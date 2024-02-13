@@ -18,9 +18,11 @@ public class Startup : FunctionsStartup
                           ?? throw new InvalidOperationException("AppSettings is not configured.");
         services
             .AddHttpClient()
+            .AddScoped<IDateTimeCalculationService, DateTimeCalculationService>()
             .AddScoped<ICostQueryService, CostQueryService>(v => new CostQueryService(
                 appSettings.ProjectId,
                 appSettings.TargetTableName,
+                v.GetRequiredService<IDateTimeCalculationService>(),
                 v.GetRequiredService<ILogger<CostQueryService>>()
             ))
             .AddScoped<ISlackNotifier, SlackNotifier>(v =>
