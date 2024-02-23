@@ -4,7 +4,7 @@
 
 GCPの前日分の確定された利用料金をSlackにお知らせしてくれるCloud Functionsです。
 
-# 設定(環境変数)
+## 設定(環境変数)
 
 - `AppSettings__ProjectId` : GCPのプロジェクトID
 - `AppSettings__SlackWebhookUrl` : 送信先のSlackのWebhook URL
@@ -13,7 +13,7 @@ GCPの前日分の確定された利用料金をSlackにお知らせしてくれ
 - `DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT` : (WORKAROUND) `false`を指定。Cloud Functionsでは上手くHTTP/3が動作しないため。
   - https://github.com/dotnet/runtime/issues/94794 を参照
 
-# Terraform
+## Terraform
 日本時間の0時に自動的にFunctionsを実行する例。sourceについてはCSRを使用するか、GCSにアップロードしたZIPファイルを指定してください。
 
 ```hcl
