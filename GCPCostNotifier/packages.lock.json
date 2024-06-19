@@ -4,29 +4,29 @@
     "net8.0": {
       "Google.Cloud.BigQuery.V2": {
         "type": "Direct",
-        "requested": "[3.5.0, )",
-        "resolved": "3.5.0",
-        "contentHash": "4I5XlH/QvlZsTKqhLFeo0RMEGXj6isPEGcHDA9DRGwRJXshsgBmoxQSXwlrC/gNoaXlIYxPDuKewn36ad3EUzA==",
+        "requested": "[3.10.0, )",
+        "resolved": "3.10.0",
+        "contentHash": "tZIy6vk9aEjUZu1C4LSjNM4j8JAIlK0qKna47GQZs5AzToLBXoYfJtJuwFZR5xVcuF23oJrcGN+jG/bubbjsRg==",
         "dependencies": {
-          "Google.Api.Gax.Rest": "[4.4.0, 5.0.0)",
-          "Google.Apis.Bigquery.v2": "[1.60.0.2949, 2.0.0)"
+          "Google.Api.Gax.Rest": "[4.8.0, 5.0.0)",
+          "Google.Apis.Bigquery.v2": "[1.67.0.3331, 2.0.0)"
         }
       },
       "Google.Cloud.Functions.Hosting": {
         "type": "Direct",
-        "requested": "[2.1.0, )",
-        "resolved": "2.1.0",
-        "contentHash": "2G1znTGby0hSUNH8L1mxYxiY887yYW14JcoTvfxSEkErvBghQDiCopEdMCNwW7dt/mk6i2prD+Y72zzYXl1+ag==",
+        "requested": "[2.2.1, )",
+        "resolved": "2.2.1",
+        "contentHash": "NeXJKt3WAFeyLh+wwJrycjk5jM56F2peWy5DxLHCpFivoorDZyyThQr3mSZM/hsE/WyUOlyYNRwTTALLeOkYNg==",
         "dependencies": {
-          "CloudNative.CloudEvents.SystemTextJson": "2.6.0",
-          "Google.Cloud.Functions.Framework": "2.1.0"
+          "CloudNative.CloudEvents.SystemTextJson": "2.7.1",
+          "Google.Cloud.Functions.Framework": "2.2.1"
         }
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
-        "requested": "[4.0.7, )",
-        "resolved": "4.0.7",
-        "contentHash": "Xrn/VABG/JhulJOmHOeOAY4/qafbEyRj3Z6gMeSABT1XCqMe8HnqOvid8gEVJt47VUZ6eD7XpTFLZ1KLyTZgdw=="
+        "requested": "[4.0.8, )",
+        "resolved": "4.0.8",
+        "contentHash": "vNi4NMG0CcJyjXxiNDcQ21FwV/whM9o9OEZKD+oP7tuxAqFEzX/x5OhC3OZJqW/w+8GOtCmJPBquYgMWgz0rfQ=="
       },
       "Newtonsoft.Json": {
         "type": "Direct",
@@ -98,35 +98,35 @@
       },
       "CloudNative.CloudEvents": {
         "type": "Transitive",
-        "resolved": "2.6.0",
-        "contentHash": "VIcb3tQZcluVEqO6yhnFIpMaPYq5Ime1JbqxLeGPZ+CqeVDOZTBGAtOGQPgfadv2tZFU7+jZqcX0Oplrs7oR7w==",
+        "resolved": "2.7.1",
+        "contentHash": "3Ks+uACmqqHjrZ51/3pfSagWULEsw+CmcOpThouPtclApCt5U1MfRmm0ktGbzKb6/9aYNnPkQF6FZ57NSfqoQQ==",
         "dependencies": {
           "System.Memory": "4.5.5"
         }
       },
       "CloudNative.CloudEvents.AspNetCore": {
         "type": "Transitive",
-        "resolved": "2.6.0",
-        "contentHash": "Io+bFboXTm5JSCEKtR+9JW2ORAm2q2p1Xgo5IzUoypblj6FRyQKfPnru6cHsqZOGUdg8G5VNTMOTwimRtjX5KQ==",
+        "resolved": "2.7.1",
+        "contentHash": "ko37m/EHoJoAonUr2mUquqXs6S0bW4DEfWJyuoSm/dA8y7e3RRz4d5uLkyNvazVTkJeRiFyLaqA3iYt9MwcUbA==",
         "dependencies": {
-          "CloudNative.CloudEvents": "2.6.0",
+          "CloudNative.CloudEvents": "2.7.1",
           "Microsoft.AspNetCore.Http": "2.1.34",
           "System.Text.Encodings.Web": "6.0.0"
         }
       },
       "CloudNative.CloudEvents.SystemTextJson": {
         "type": "Transitive",
-        "resolved": "2.6.0",
-        "contentHash": "pDrmaQqFYhVOHsg5LpAsLbiL5jd67RWilN0854gM5RbUkAOVWSZTT3m2F8HnVsjq22YfZrwuOkDaLBYFOjiFZQ==",
+        "resolved": "2.7.1",
+        "contentHash": "9uVvLEjzimt44enwqhV2s/9eaKD/78sTeI96H1enJrVFJHcoS3zObWcc3/yu9VdfoPdM4mNQ/+WU+99FIUo+tg==",
         "dependencies": {
-          "CloudNative.CloudEvents": "2.6.0",
+          "CloudNative.CloudEvents": "2.7.1",
           "System.Text.Json": "5.0.2"
         }
       },
       "Google.Api.Gax": {
         "type": "Transitive",
-        "resolved": "4.4.0",
-        "contentHash": "vkqxzz54dRdl3uUmz0hOhMfR9EjGrWJI+SeOl3UC1Gr/mHfHOwYiRPnJbub+77/xS0lAJBs02iOh3ay9zgzW4Q==",
+        "resolved": "4.8.0",
+        "contentHash": "xlV8Jq/G5CQAA3PwYAuKGjfzGOP7AvjhREnE6vgZlzxREGYchHudZWa2PWSqFJL+MBtz9YgitLpRogANN3CVvg==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
           "Newtonsoft.Json": "13.0.3"
@@ -134,54 +134,55 @@
       },
       "Google.Api.Gax.Rest": {
         "type": "Transitive",
-        "resolved": "4.4.0",
-        "contentHash": "L4sJluVTLMy5cqFR439c2UNuWU20Wqh6yatY455rRwRlfdQlCc7Z4TdYphj2qH3cLo5NCPGQM37r/uQDLzF3eA==",
+        "resolved": "4.8.0",
+        "contentHash": "zaA5LZ2VvGj/wwIzRB68swr7khi2kWNgqWvsB0fYtScIAl3kGkGtqiBcx63H1YLeKr5xau1866bFjTeReH6FSQ==",
         "dependencies": {
-          "Google.Api.Gax": "4.4.0",
-          "Google.Apis.Auth": "[1.60.0, 2.0.0)",
+          "Google.Api.Gax": "4.8.0",
+          "Google.Apis.Auth": "[1.67.0, 2.0.0)",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         }
       },
       "Google.Apis": {
         "type": "Transitive",
-        "resolved": "1.60.0",
-        "contentHash": "T8ojAsKlsMkt5nZhTQuocqHYzm/knVm8o2/JMm4louEjaKzT4x0FihoCIxCYSTRGWkYC27LPWspyG4p76+bMzA==",
+        "resolved": "1.67.0",
+        "contentHash": "XM8/fViJaB1pN61OdXy5RMZoQEqd3hKlWvA/K431gFSb5XtQ48BynfgrbBkUtFcPbSRa4BdjBHzSbkBh/skyMg==",
         "dependencies": {
-          "Google.Apis.Core": "1.60.0"
+          "Google.Apis.Core": "1.67.0"
         }
       },
       "Google.Apis.Auth": {
         "type": "Transitive",
-        "resolved": "1.60.0",
-        "contentHash": "AUuWniIf2muns/9hesiF7yCKeQN+PbdTU864Rb2wDzW4xmepO6tEnoqREPeow95qIAgkOlL/byKeU65d3ox5Ng==",
+        "resolved": "1.67.0",
+        "contentHash": "Bs9BlbZ12Y4NXzMONjpzQhZr9VbwLUTGMHkcQRF36aYnk2fYrmj5HNVNh7PPHDDq1fcEQpCtPic2nSlpYQLKXw==",
         "dependencies": {
-          "Google.Apis": "1.60.0",
-          "Google.Apis.Core": "1.60.0"
+          "Google.Apis": "1.67.0",
+          "Google.Apis.Core": "1.67.0",
+          "System.Management": "7.0.2"
         }
       },
       "Google.Apis.Bigquery.v2": {
         "type": "Transitive",
-        "resolved": "1.60.0.2949",
-        "contentHash": "EMYFkwktkzHuOsqg0mVcSalnWu6TuxWvMtRbZCh/oBPcXhJcg9Gpi7+57AN/ijv4JKOkzOU9GCjdRnnpYz/tbw==",
+        "resolved": "1.67.0.3331",
+        "contentHash": "n+7pa1HTVZkaCBNKj0mRWzuKw0UjQSbvvGJ8uJ1R0UClTY1IiuP2+WYTQA2UTXTjiQXwQCxiwi7rwtV0s+9oRg==",
         "dependencies": {
-          "Google.Apis": "1.60.0",
-          "Google.Apis.Auth": "1.60.0"
+          "Google.Apis": "1.67.0",
+          "Google.Apis.Auth": "1.67.0"
         }
       },
       "Google.Apis.Core": {
         "type": "Transitive",
-        "resolved": "1.60.0",
-        "contentHash": "NOkjqMQblYEZXt2OEgshWayveYW11Pi+Uz0I30Kzl9BvL4TZLJzMqtiu1EdV8XkyyjGuAUgANdi4BOqRDlbVEw==",
+        "resolved": "1.67.0",
+        "contentHash": "IPq0I3B01NYZraPoMl8muELFLg4Vr2sbfyZp4PR2Xe3MAhHkZCiKyV28Yh1L14zIKUb0X0snol1sR5/mx4S6Iw==",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.2"
+          "Newtonsoft.Json": "13.0.3"
         }
       },
       "Google.Cloud.Functions.Framework": {
         "type": "Transitive",
-        "resolved": "2.1.0",
-        "contentHash": "5s3+HGU6Dscby4hkqGNdOOQ2rZMUvf4S3KqxfP+bXZ72vgONb0P1zOS6ng2CYgSeawLCkHnTx7wkEuQ3QTaRhw==",
+        "resolved": "2.2.1",
+        "contentHash": "ymiSZleXRP/GtXwzcJrEVq2Ass8nvY67I75HUswVY/66C+jvK2BA3HZFHYFJ3cmt5Phn0aaBLWHCRNs3zrrzsQ==",
         "dependencies": {
-          "CloudNative.CloudEvents.AspNetCore": "2.6.0"
+          "CloudNative.CloudEvents.AspNetCore": "2.7.1"
         }
       },
       "Microsoft.AspNetCore.Http": {
@@ -455,6 +456,11 @@
         "resolved": "4.5.0",
         "contentHash": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A=="
       },
+      "System.CodeDom": {
+        "type": "Transitive",
+        "resolved": "7.0.0",
+        "contentHash": "GLltyqEsE5/3IE+zYRP5sNa1l44qKl9v+bfdMcwg+M9qnQf47wK3H0SUR/T+3N4JEQXF3vV4CSuuo0rsg+nq2A=="
+      },
       "System.Collections": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -677,6 +683,14 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+        }
+      },
+      "System.Management": {
+        "type": "Transitive",
+        "resolved": "7.0.2",
+        "contentHash": "/qEUN91mP/MUQmJnM5y5BdT7ZoPuVrtxnFlbJ8a3kBJGhe2wCzBfnPFtK2wTtEEcf3DMGR9J00GZZfg6HRI6yA==",
+        "dependencies": {
+          "System.CodeDom": "7.0.0"
         }
       },
       "System.Memory": {
