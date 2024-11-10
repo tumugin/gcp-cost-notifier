@@ -323,11 +323,8 @@
       },
       "NodaTime": {
         "type": "Transitive",
-        "resolved": "3.1.12",
-        "contentHash": "nDcUbG0jiEXmV8cOz7V8GnUKlmPJjqZm/R+E2JNnUSdlMoaQ19xSU8GXFLReGs/Nt8xdBfA8XfO77xVboWO1Vg==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "4.7.1"
-        }
+        "resolved": "3.2.0",
+        "contentHash": "yoRA3jEJn8NM0/rQm78zuDNPA3DonNSZdsorMUj+dltc1D+/Lc5h9YXGqbEEZozMGr37lAoYkcSM/KjTVqD0ow=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -1205,7 +1202,7 @@
           "Google.Cloud.BigQuery.V2": "[3.10.0, )",
           "Google.Cloud.Functions.Hosting": "[2.2.1, )",
           "Newtonsoft.Json": "[13.0.3, )",
-          "NodaTime": "[3.1.12, )",
+          "NodaTime": "[3.2.0, )",
           "Slack.Webhooks": "[1.1.5, )",
           "System.Net.Http": "[4.3.4, )",
           "System.Text.RegularExpressions": "[4.3.1, )"
