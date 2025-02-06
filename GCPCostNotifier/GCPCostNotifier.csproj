@@ -8,14 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Google.Cloud.BigQuery.V2" Version="3.10.0" />
+      <PackageReference Include="Google.Cloud.BigQuery.V2" Version="3.11.0" />
       <PackageReference Include="Google.Cloud.Functions.Hosting" Version="2.2.1" />
       <PackageReference Include="IDisposableAnalyzers" Version="4.0.8">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="NodaTime" Version="3.2.0" />
+      <PackageReference Include="NodaTime" Version="3.2.1" />
       <PackageReference Include="Slack.Webhooks" Version="1.1.5" />
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
       <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
