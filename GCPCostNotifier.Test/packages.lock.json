@@ -38,29 +38,23 @@
       },
       "CloudNative.CloudEvents": {
         "type": "Transitive",
-        "resolved": "2.7.1",
-        "contentHash": "3Ks+uACmqqHjrZ51/3pfSagWULEsw+CmcOpThouPtclApCt5U1MfRmm0ktGbzKb6/9aYNnPkQF6FZ57NSfqoQQ==",
-        "dependencies": {
-          "System.Memory": "4.5.5"
-        }
+        "resolved": "2.8.0",
+        "contentHash": "RvabvAQV7u3FZcZL5UlRmFz3/T5nMl86GpChpRvHKRHbO+/I4LBcZ0xRqYnNfAh30gM+h/JkSBHEnbhl0zmGtA=="
       },
       "CloudNative.CloudEvents.AspNetCore": {
         "type": "Transitive",
-        "resolved": "2.7.1",
-        "contentHash": "ko37m/EHoJoAonUr2mUquqXs6S0bW4DEfWJyuoSm/dA8y7e3RRz4d5uLkyNvazVTkJeRiFyLaqA3iYt9MwcUbA==",
+        "resolved": "2.8.0",
+        "contentHash": "wkYudLZ+fDLwJDvUDQlL8VAvlCUHhhafRg3blhrvwOvFJR3nj4PY8gs5ROAAlhHMmxvHfufE0LNoyqdL7Bj80g==",
         "dependencies": {
-          "CloudNative.CloudEvents": "2.7.1",
-          "Microsoft.AspNetCore.Http": "2.1.34",
-          "System.Text.Encodings.Web": "6.0.0"
+          "CloudNative.CloudEvents": "2.8.0"
         }
       },
       "CloudNative.CloudEvents.SystemTextJson": {
         "type": "Transitive",
-        "resolved": "2.7.1",
-        "contentHash": "9uVvLEjzimt44enwqhV2s/9eaKD/78sTeI96H1enJrVFJHcoS3zObWcc3/yu9VdfoPdM4mNQ/+WU+99FIUo+tg==",
+        "resolved": "2.8.0",
+        "contentHash": "En3Bvf7tTbGyB/AWJIPGw8ksh1OgiSI3cBXmNvuH9+PMR4l0vVRlp9YsTu+gY7S/0VFyJDHP66P3uZHzgsRQ7w==",
         "dependencies": {
-          "CloudNative.CloudEvents": "2.7.1",
-          "System.Text.Json": "5.0.2"
+          "CloudNative.CloudEvents": "2.8.0"
         }
       },
       "Google.Api.Gax": {
@@ -129,57 +123,19 @@
       },
       "Google.Cloud.Functions.Framework": {
         "type": "Transitive",
-        "resolved": "2.2.1",
-        "contentHash": "ymiSZleXRP/GtXwzcJrEVq2Ass8nvY67I75HUswVY/66C+jvK2BA3HZFHYFJ3cmt5Phn0aaBLWHCRNs3zrrzsQ==",
+        "resolved": "3.0.1",
+        "contentHash": "GRxWPuiT//6lJx1y9d0ctlF67/WTjZSMEzXKNdGv3CxptTUV2a3WGw1bD4dVwT4L22WR92+Pjk7NofwuRC+M1w==",
         "dependencies": {
-          "CloudNative.CloudEvents.AspNetCore": "2.7.1"
+          "CloudNative.CloudEvents.AspNetCore": "2.8.0"
         }
       },
       "Google.Cloud.Functions.Hosting": {
         "type": "Transitive",
-        "resolved": "2.2.1",
-        "contentHash": "NeXJKt3WAFeyLh+wwJrycjk5jM56F2peWy5DxLHCpFivoorDZyyThQr3mSZM/hsE/WyUOlyYNRwTTALLeOkYNg==",
+        "resolved": "3.0.1",
+        "contentHash": "KpaJIFEQ16Fn/SOE4xy9wE61/t00IQ7JscFhstC1ZXkTBOtvDNqeKVugTRamiFTYI12uas64QZgboK1NMDyTFw==",
         "dependencies": {
-          "CloudNative.CloudEvents.SystemTextJson": "2.7.1",
-          "Google.Cloud.Functions.Framework": "2.2.1"
-        }
-      },
-      "Microsoft.AspNetCore.Http": {
-        "type": "Transitive",
-        "resolved": "2.1.34",
-        "contentHash": "d1U34fyniRrDW0SD7KryDhXq1KWEjeE1XuLgk/qcdFHUjkjY6XztmhEmQJicGlPYKEZOe+3UMWz5EZChLwnrvQ==",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Abstractions": "2.1.1",
-          "Microsoft.AspNetCore.WebUtilities": "2.1.1",
-          "Microsoft.Extensions.ObjectPool": "2.1.1",
-          "Microsoft.Extensions.Options": "2.1.1",
-          "Microsoft.Net.Http.Headers": "2.1.1"
-        }
-      },
-      "Microsoft.AspNetCore.Http.Abstractions": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "kQUEVOU4loc8CPSb2WoHFTESqwIa8Ik7ysCBfTwzHAd0moWovc9JQLmhDIHlYLjHbyexqZAlkq/FPRUZqokebw==",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "2.1.1",
-          "System.Text.Encodings.Web": "4.5.0"
-        }
-      },
-      "Microsoft.AspNetCore.Http.Features": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "VklZ7hWgSvHBcDtwYYkdMdI/adlf7ebxTZ9kdzAhX+gUs5jSHE9mZlTamdgf9miSsxc1QjNazHXTDJdVPZKKTw==",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.1.1"
-        }
-      },
-      "Microsoft.AspNetCore.WebUtilities": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "PGKIZt4+412Z/XPoSjvYu/QIbTxcAQuEFNoA1Pw8a9mgmO0ZhNBmfaNyhgXFf7Rq62kP0tT/2WXpxdcQhkFUPA==",
-        "dependencies": {
-          "Microsoft.Net.Http.Headers": "2.1.1",
-          "System.Text.Encodings.Web": "4.5.0"
+          "CloudNative.CloudEvents.SystemTextJson": "2.8.0",
+          "Google.Cloud.Functions.Framework": "3.0.1"
         }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
@@ -196,38 +152,6 @@
         "type": "Transitive",
         "resolved": "6.0.0",
         "contentHash": "xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg=="
-      },
-      "Microsoft.Extensions.ObjectPool": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "SErON45qh4ogDp6lr6UvVmFYW0FERihW+IQ+2JyFv1PUyWktcJytFaWH5zarufJvZwhci7Rf1IyGXr9pVEadTw=="
-      },
-      "Microsoft.Extensions.Options": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "V7lXCU78lAbzaulCGFKojcCyG8RTJicEbiBkPJjFqiqXwndEBBIehdXRMWEVU3UtzQ1yDvphiWUL9th6/4gJ7w==",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.1",
-          "Microsoft.Extensions.Primitives": "2.1.1"
-        }
-      },
-      "Microsoft.Extensions.Primitives": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "scJ1GZNIxMmjpENh0UZ8XCQ6vzr/LzeF9WvEA51Ix2OQGAs9WPgPu8ABVUdvpKPLuor/t05gm6menJK3PwqOXg==",
-        "dependencies": {
-          "System.Memory": "4.5.1",
-          "System.Runtime.CompilerServices.Unsafe": "4.5.1"
-        }
-      },
-      "Microsoft.Net.Http.Headers": {
-        "type": "Transitive",
-        "resolved": "2.1.1",
-        "contentHash": "lPNIphl8b2EuhOE9dMH6EZDmu7pS882O+HMi5BJNsigxHaWlBrYxZHFZgE18cyaPp6SSZcTkKkuzfjV/RRQKlA==",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.1.1",
-          "System.Buffers": "4.5.0"
-        }
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
@@ -453,8 +377,15 @@
       },
       "System.Buffers": {
         "type": "Transitive",
-        "resolved": "4.5.0",
-        "contentHash": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A=="
+        "resolved": "4.3.0",
+        "contentHash": "ratu44uTIHgeBeI0dE8DWvmXVBSo4u7ozRZZHOMmK/JPpYyo0dAfgSiHlpiObMQ5lEtEyIXA40sKRYg5J6A8uQ==",
+        "dependencies": {
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Threading": "4.3.0"
+        }
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -688,11 +619,6 @@
         "dependencies": {
           "System.CodeDom": "7.0.0"
         }
-      },
-      "System.Memory": {
-        "type": "Transitive",
-        "resolved": "4.5.5",
-        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
       },
       "System.Net.Http": {
         "type": "Transitive",
@@ -1092,19 +1018,6 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
-      "System.Text.Encodings.Web": {
-        "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        }
-      },
-      "System.Text.Json": {
-        "type": "Transitive",
-        "resolved": "5.0.2",
-        "contentHash": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ=="
-      },
       "System.Text.RegularExpressions": {
         "type": "Transitive",
         "resolved": "4.3.1",
@@ -1197,7 +1110,7 @@
         "type": "Project",
         "dependencies": {
           "Google.Cloud.BigQuery.V2": "[3.11.0, )",
-          "Google.Cloud.Functions.Hosting": "[2.2.1, )",
+          "Google.Cloud.Functions.Hosting": "[3.0.1, )",
           "Newtonsoft.Json": "[13.0.3, )",
           "NodaTime": "[3.2.2, )",
           "Slack.Webhooks": "[1.1.5, )",
