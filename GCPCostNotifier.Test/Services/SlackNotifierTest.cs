@@ -59,7 +59,7 @@ public class SlackNotifierTest
         var chiaService = new ChiaCharacterService();
         var notifier = new SlackNotifier(TestWebhookUrl, _httpClient, chiaService, _logger);
 
-        Assert.That(chiaService.GetColor(), Is.EqualTo("#C8A2C8"));
+        Assert.That(chiaService.GetColor(), Is.EqualTo("#FFFFFF"));
     }
 
     [Test]
@@ -68,7 +68,7 @@ public class SlackNotifierTest
         var chiaService = new ChiaCharacterService();
         var notifier = new SlackNotifier(TestWebhookUrl, _httpClient, chiaService, _logger);
 
-        Assert.That(chiaService.GetFooterText(), Does.Contain("ちあちゃん"));
+        Assert.That(chiaService.GetFooterText(), Does.Contain("未白ちあ"));
     }
 
     [Test]

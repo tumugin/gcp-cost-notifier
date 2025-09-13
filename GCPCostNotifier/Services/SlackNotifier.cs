@@ -14,7 +14,7 @@ public class SlackNotifier(string slackWebhookUrl, HttpClient httpClient, IChara
         Log.SendingSlackMessage(logger);
         await slackClient.PostAsync(new SlackMessage
         {
-            Text = characterService.GetGreetingMessage(totalCost) + $"\n(プロジェクト: {projectId})",
+            Text = characterService.GetGreetingMessage(totalCost, projectId),
             Markdown = true,
             Attachments =
             [

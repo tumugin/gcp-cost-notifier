@@ -20,6 +20,6 @@ public class CharacterServiceFactoryTest
         var service = CharacterServiceFactory.Create(Character.Chia);
 
         Assert.That(service, Is.InstanceOf<ChiaCharacterService>());
-        Assert.That(service.GetColor(), Is.EqualTo("#C8A2C8"));
+        Assert.That(service.GetColor(), Is.EqualTo("#FFFFFF"));
     }
 }
