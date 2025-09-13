@@ -4,12 +4,14 @@ namespace GCPCostNotifier;
 
 using CloudNative.CloudEvents;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Services;
 
 public class YesterdayCostNotifyFunction(
     ILogger<YesterdayCostNotifyFunction> logger,
     ICostQueryService costQueryService,
-    ISlackNotifier slackNotifier
+    ISlackNotifier slackNotifier,
+    IOptions<AppSetting> appSettings
 ) : ICloudEventFunction
 {
     public async Task HandleAsync(CloudEvent cloudEvent, CancellationToken cancellationToken)
@@ -27,6 +29,6 @@ public class YesterdayCostNotifyFunction(
             losAngelesTimeZone,
             cancellationToken
         );
-        await slackNotifier.NotifyDailyResultAsync(results, cancellationToken);
+        await slackNotifier.NotifyDailyResultAsync(results, appSettings.Value.ProjectId, cancellationToken);
     }
 }

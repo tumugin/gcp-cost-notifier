@@ -1,0 +1,15 @@
+namespace GCPCostNotifier.Services;
+
+public class MayuriCharacterService : ICharacterService
+{
+    public string GetGreetingMessage(decimal totalCost) =>
+        "*:white_heart: まゆりちゃんが昨日のGCPのコストをお知らせします :white_heart:*\n" +
+        $"昨日のGCPのコストは *{totalCost.ToJpyStyleString()}* だよ！！\n" +
+        "お金使いすぎないで欲しいな！";
+
+    public string GetAttachmentText() => "昨日のGCPのコストの詳細だよ！（1円未満のものは省略したよ！）";
+
+    public string GetFooterText() => "コストを計算する仔羽まゆりちゃん";
+
+    public string GetColor() => "#ADE0EE";
+}

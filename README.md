@@ -4,11 +4,21 @@
 
 GCPの前日分の確定された利用料金をSlackにお知らせしてくれるCloud Functionsです。
 
+## キャラクター機能
+
+このアプリケーションは2つのキャラクターから選択できます：
+
+- **まゆりちゃん** (mayuri) : 仔羽まゆりをイメージしたキャラクター。かわいらしい口調でお知らせします。
+- **ちあちゃん** (chia) : よりクールな口調でお知らせするキャラクターです。
+
+キャラクターによってメッセージの文言や色が変わります。
+
 ## 設定(環境変数)
 
 - `AppSettings__ProjectId` : GCPのプロジェクトID
 - `AppSettings__SlackWebhookUrl` : 送信先のSlackのWebhook URL
 - `AppSettings__TargetTableName` : 抽出元のBigQueryのテーブル名
+- `AppSettings__Character` : 使用するキャラクター（"Mayuri"または"Chia"、省略時は"Mayuri"）
 - `DOTNET_ENVIRONMENT` : デバッグでない限り`Production`を指定
 - `DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT` : (WORKAROUND) `false`を指定。Cloud Functionsでは上手くHTTP/3が動作しないため。
   - https://github.com/dotnet/runtime/issues/94794 を参照
@@ -26,6 +36,7 @@ export DOTNET_ENVIRONMENT=Development
 export AppSettings__ProjectId="your-gcp-project-id"
 export AppSettings__SlackWebhookUrl="your-slack-webhook-url"
 export AppSettings__TargetTableName="your-bigquery-table-name"
+export AppSettings__Character="Mayuri"  # または "Chia"
 
 # Functions Frameworkで実行
 dotnet run
@@ -39,8 +50,9 @@ dotnet run
 {
   "AppSettings": {
     "ProjectId": "your-gcp-project-id",
-    "SlackWebhookUrl": "your-slack-webhook-url", 
-    "TargetTableName": "your-bigquery-table-name"
+    "SlackWebhookUrl": "your-slack-webhook-url",
+    "TargetTableName": "your-bigquery-table-name",
+    "Character": "Mayuri"
   }
 }
 ```
@@ -113,6 +125,11 @@ resource "google_cloud_run_v2_service" "cost_notification_service" {
         name  = "AppSettings__TargetTableName"
         // Set your BigQuery Billing Export Table name
         value = "project-name.dataset-name.gcp_billing_export_v1_*******"
+      }
+      env {
+        name  = "AppSettings__Character"
+        // Set character "Mayuri" or "Chia" (default: "Mayuri")
+        value = "Mayuri"
       }
 
       resources {
