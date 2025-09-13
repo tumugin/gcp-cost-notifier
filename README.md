@@ -60,49 +60,101 @@ curl -X POST http://localhost:8080 \
 ```
 
 ## Terraform
-日本時間の0時に自動的にFunctionsを実行する例。sourceについてはCSRを使用するか、GCSにアップロードしたZIPファイルを指定してください。
+日本時間の0時に自動的にCloud Runサービスを実行する例。GitHub Container Registryの公開イメージを使用します。
 
 ```hcl
-resource "google_cloudfunctions2_function" "cost_notification_function" {
-  name        = "cost-notification-function"
-  location    = "asia-northeast1"
-  description = "仔羽まゆりちゃんがGCPのコストを通知する関数"
+resource "google_artifact_registry_repository" "ghcr" {
+  location      = "asia-northeast1"
+  repository_id = "ghcr"
+  description   = "Remote docker repository for GitHub Container Registry"
+  format        = "DOCKER"
+  mode          = "REMOTE_REPOSITORY"
 
-  build_config {
-    runtime     = "dotnet8"
-    entry_point = "GCPCostNotifier.YesterdayCostNotifyFunction"
-    source {
-      repo_source {
-        repo_name  = "github_tumugin_gcp-cost-notifier"
-        commit_sha = "92666cc296a968ce180341b00ad89ee78920b017"
+  remote_repository_config {
+    description                 = "GitHub Container Registry"
+    disable_upstream_validation = true
+    docker_repository {
+      custom_repository {
+        uri = "https://ghcr.io"
       }
     }
   }
+}
 
-  service_config {
-    max_instance_count               = 1
-    min_instance_count               = 0
-    available_memory                 = "128Mi"
-    timeout_seconds                  = 120
-    max_instance_request_concurrency = 1
-    available_cpu                    = "0.083"
-    environment_variables = {
+resource "google_cloud_run_v2_service" "cost_notification_service" {
+  name     = "cost-notification-service"
+  location = "asia-northeast1"
+  ingress  = "INGRESS_TRAFFIC_INTERNAL_ONLY"
+
+  template {
+    containers {
+      // Image of GitHub Container Registry(See releases for newest tag)
+      image = "${google_artifact_registry_repository.ghcr.location}-docker.pkg.dev/${var.project}/${google_artifact_registry_repository.ghcr.name}/tumugin/gcp-cost-notifier:6c17e0d60ebd9ca5a3d44157dd11a8446b389ee0"
+
       // workaround: https://github.com/dotnet/runtime/issues/94794
-      DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT = "false"
-      DOTNET_ENVIRONMENT                                     = "Production"
-      AppSettings__ProjectId                                 = var.project
-      AppSettings__SlackWebhookUrl                           = "*******"
-      AppSettings__TargetTableName                           = "*******"
-    }
-    ingress_settings               = "ALLOW_INTERNAL_ONLY"
-    all_traffic_on_latest_revision = true
-  }
+      env {
+        name  = "DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT"
+        value = "false"
+      }
+      env {
+        name  = "DOTNET_ENVIRONMENT"
+        value = "Production"
+      }
+      env {
+        name  = "AppSettings__ProjectId"
+        value = var.project
+      }
+      env {
+        name  = "AppSettings__SlackWebhookUrl"
+        // Set your Slack Webhook URL
+        value = "https://hooks.slack.com/services/*******"
+      }
+      env {
+        name  = "AppSettings__TargetTableName"
+        // Set your BigQuery Billing Export Table name
+        value = "project-name.dataset-name.gcp_billing_export_v1_*******"
+      }
 
-  event_trigger {
-    trigger_region = "asia-northeast1"
-    event_type     = "google.cloud.pubsub.topic.v1.messagePublished"
-    pubsub_topic   = google_pubsub_topic.cost_notification_trigger_topic.id
-    retry_policy   = "RETRY_POLICY_RETRY"
+      resources {
+        limits = {
+          cpu    = "1"
+          memory = "256Mi"
+        }
+        cpu_idle = true
+      }
+    }
+
+    scaling {
+      min_instance_count = 0
+      max_instance_count = 1
+    }
+
+    timeout = "120s"
+  }
+}
+
+resource "google_service_account" "cloud_run_invoker" {
+  account_id   = "cloud-run-invoker"
+  display_name = "Cloud Run Invoker Service Account"
+}
+
+resource "google_cloud_run_v2_service_iam_member" "invoker" {
+  location = google_cloud_run_v2_service.cost_notification_service.location
+  name     = google_cloud_run_v2_service.cost_notification_service.name
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${google_service_account.cloud_run_invoker.email}"
+}
+
+resource "google_pubsub_subscription" "cost_notification_subscription" {
+  name  = "cost-notification-subscription"
+  topic = google_pubsub_topic.cost_notification_trigger_topic.name
+
+  push_config {
+    push_endpoint = google_cloud_run_v2_service.cost_notification_service.uri
+
+    oidc_token {
+      service_account_email = google_service_account.cloud_run_invoker.email
+    }
   }
 }
 
@@ -110,9 +162,9 @@ resource "google_pubsub_topic" "cost_notification_trigger_topic" {
   name = "cost-notification-trigger-topic"
 }
 
-resource "google_cloud_scheduler_job" "invoke_cost_notification_function" {
-  name        = "invoke-cost-notification-function"
-  description = "コスト通知用のFunctionを定期実行するジョブ"
+resource "google_cloud_scheduler_job" "invoke_cost_notification_service" {
+  name        = "invoke-cost-notification-service"
+  description = "コスト通知用のCloud Runサービスを定期実行するジョブ"
   schedule    = "0 0 * * *"
   region      = "asia-northeast1"
   time_zone   = "Asia/Tokyo"
