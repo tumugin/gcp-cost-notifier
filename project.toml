@@ -1,0 +1,14 @@
+[build]
+builder = "gcr.io/buildpacks/builder:google-22"
+
+[[build.env]]
+name = "GOOGLE_FUNCTION_TARGET"
+value = "GCPCostNotifier.YesterdayCostNotifyFunction"
+
+[[build.env]]
+name = "GOOGLE_FUNCTION_SIGNATURE_TYPE"
+value = "http"
+
+[[build.env]]
+name = "GOOGLE_BUILDABLE"
+value = "GCPCostNotifier/GCPCostNotifier.csproj"
