@@ -43,11 +43,11 @@ jobs:
 
       - name: Build with Cloud Native Buildpacks
         run: |
-          pack build ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
-            --publish
+          pack build ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Tag and push additional tags
+      - name: Push image and additional tags
         run: |
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           for tag in $(echo '${{ steps.meta.outputs.tags }}' | tr '\n' ' '); do
             if [ "$tag" != "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" ]; then
               docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} $tag
