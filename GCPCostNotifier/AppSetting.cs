@@ -9,4 +9,6 @@ public class AppSetting
     [Required] public required string TargetTableName { get; init; }
 
     [Required] public required string SlackWebhookUrl { get; init; }
+
+    public Character Character { get; init; } = Character.Mayuri;
 }
