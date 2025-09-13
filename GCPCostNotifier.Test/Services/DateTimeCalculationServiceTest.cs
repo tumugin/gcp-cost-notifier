@@ -25,7 +25,7 @@ public class DateTimeCalculationServiceTest
             losAngelesTimeZone
         );
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(
                 result.ReferenceDateTimeOffset.ToString("o", CultureInfo.InvariantCulture),
@@ -47,6 +47,6 @@ public class DateTimeCalculationServiceTest
                 result.PartitionEndDateTimeOffset.ToString("o", CultureInfo.InvariantCulture),
                 Is.EqualTo("2024-02-11T08:00:00.0000000+00:00")
             );
-        });
+        }
     }
 }
