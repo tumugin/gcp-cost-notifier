@@ -23,6 +23,7 @@ public class Startup : FunctionsStartup
                 return new CostQueryService(
                     appSettings.ProjectId,
                     appSettings.TargetTableName,
+                    appSettings.BillingTargetProjectId ?? appSettings.ProjectId,
                     v.GetRequiredService<IDateTimeCalculationService>(),
                     v.GetRequiredService<ILogger<CostQueryService>>()
                 );
