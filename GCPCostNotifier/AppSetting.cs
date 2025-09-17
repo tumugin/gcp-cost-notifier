@@ -11,4 +11,6 @@ public class AppSetting
     [Required] public required string SlackWebhookUrl { get; init; }
 
     public Character Character { get; init; } = Character.Mayuri;
+
+    public string? BillingTargetProjectId { get; init; }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 public class CostQueryService(
     string projectId,
     string targetTableName,
+    string billingTargetProjectId,
     IDateTimeCalculationService dateTimeCalculationService,
     ILogger<CostQueryService> logger
 ) : ICostQueryService
@@ -17,7 +18,8 @@ public class CostQueryService(
         CancellationToken cancellationToken
     )
     {
-        var calculatedDateTimes = dateTimeCalculationService.CalculateDateTimeOffsetsForYesterday(targetDateTimeOffset, targetTimeZoneInfo);
+        var calculatedDateTimes =
+            dateTimeCalculationService.CalculateDateTimeOffsetsForYesterday(targetDateTimeOffset, targetTimeZoneInfo);
 
         var query =
             @$"
@@ -28,7 +30,8 @@ SELECT
 FROM `{targetTableName}`
 WHERE
     _PARTITIONTIME BETWEEN @partitionStartDateTime AND @partitionEndDateTime AND
-    usage_start_time >= @startDateTime AND usage_end_time <= @endDateTime
+    usage_start_time >= @startDateTime AND usage_end_time <= @endDateTime AND
+    `project`.`id` = @billingTargetProjectId
 GROUP BY service.description, sku.description
 HAVING SummarizedCost > 0
 ORDER BY ServiceName, ServiceDescription";
@@ -64,6 +67,11 @@ ORDER BY ServiceName, ServiceDescription";
                     "endDateTime",
                     BigQueryDbType.Timestamp,
                     calculatedDateTimes.EndOffsetDateTimeOffset
+                ),
+                new BigQueryParameter(
+                    "billingTargetProjectId",
+                    BigQueryDbType.String,
+                    billingTargetProjectId
                 )
             },
             cancellationToken: cancellationToken
