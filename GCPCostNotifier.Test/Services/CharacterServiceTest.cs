@@ -26,7 +26,7 @@ public class CharacterServiceTest
         var service = new MayuriCharacterService();
         var result = service.GetAttachmentText();
 
-        Assert.That(result, Is.EqualTo("昨日のGCPのコストの詳細だよ！（1円未満のものは省略したよ！）"));
+        Assert.That(result, Is.EqualTo("昨日のGoogle Cloudのコストの詳細だよ！（1円未満のものは省略したよ！）"));
     }
 
     [Test]
@@ -55,10 +55,10 @@ public class CharacterServiceTest
         var projectId = "chia-test-project";
         var result = service.GetGreetingMessage(totalCost, projectId);
 
-        Assert.That(result, Does.Contain("未白ちあ"));
+        Assert.That(result, Does.Contain("ちあちゃん"));
         Assert.That(result, Does.Contain("￥2,000"));
         Assert.That(result, Does.Contain("お金の使い方気をつけようね"));
-        Assert.That(result, Does.Contain(":white_heart:"));
+        Assert.That(result, Does.Contain(":hamster:"));
         Assert.That(result, Does.Contain("chia-test-project"));
     }
 
@@ -68,7 +68,7 @@ public class CharacterServiceTest
         var service = new ChiaCharacterService();
         var result = service.GetAttachmentText();
 
-        Assert.That(result, Is.EqualTo("昨日のGCPのコストの詳細だよ〜♪（1円未満のものは省略しちゃった！）"));
+        Assert.That(result, Is.EqualTo("昨日のGoogle Cloudのコストの詳細だよ〜♪（1円未満のものは省略しちゃった！）"));
     }
 
     [Test]
