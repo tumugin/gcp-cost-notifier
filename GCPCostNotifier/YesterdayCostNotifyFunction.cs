@@ -29,6 +29,10 @@ public class YesterdayCostNotifyFunction(
             losAngelesTimeZone,
             cancellationToken
         );
-        await slackNotifier.NotifyDailyResultAsync(results, appSettings.Value.ProjectId, cancellationToken);
+        await slackNotifier.NotifyDailyResultAsync(
+            results,
+            appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,
+            cancellationToken
+        );
     }
 }
