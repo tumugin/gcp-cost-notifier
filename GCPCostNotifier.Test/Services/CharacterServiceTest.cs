@@ -26,7 +26,7 @@ public class CharacterServiceTest
         var service = new MayuriCharacterService();
         var result = service.GetAttachmentText();
 
-        Assert.That(result, Is.EqualTo("昨日のGCPのコストの詳細だよ！（1円未満のものは省略したよ！）"));
+        Assert.That(result, Is.EqualTo("昨日のGoogle Cloudのコストの詳細だよ！（1円未満のものは省略したよ！）"));
     }
 
     [Test]
@@ -68,7 +68,7 @@ public class CharacterServiceTest
         var service = new ChiaCharacterService();
         var result = service.GetAttachmentText();
 
-        Assert.That(result, Is.EqualTo("昨日のGCPのコストの詳細だよ〜♪（1円未満のものは省略しちゃった！）"));
+        Assert.That(result, Is.EqualTo("昨日のGoogle Cloudのコストの詳細だよ〜♪（1円未満のものは省略しちゃった！）"));
     }
 
     [Test]
