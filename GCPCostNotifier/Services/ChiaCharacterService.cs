@@ -3,7 +3,7 @@ namespace GCPCostNotifier.Services;
 public class ChiaCharacterService : ICharacterService
 {
     public string GetGreetingMessage(decimal totalCost, string projectId) =>
-        "*:white_heart: 未白ちあが昨日のGoogle Cloudのコストをお知らせするよ〜 :white_heart:*\n" +
+        "*:hamster: ちあちゃんが昨日のGoogle Cloudのコストをお知らせするよ〜 :hamster:*\n" +
         $"昨日のGoogle Cloudのコストは *{totalCost.ToJpyStyleString()}* だったよ！\n" +
         "みんな〜、お金の使い方気をつけようね♪\n" +
         $"(プロジェクト: {projectId})";
