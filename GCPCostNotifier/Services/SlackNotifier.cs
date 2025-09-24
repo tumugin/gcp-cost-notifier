@@ -32,50 +32,57 @@ public class SlackNotifier(
 
         Log.SendingSlackMessage(logger);
 
-        await slack.PostToWebhook(slackWebhookUrl, new Message
+        var filteredCostSummaries = costSummaries
+            .Where(v => v.SummarizedCost >= 1.0m)
+            .Select(v => new Markdown
+            {
+                Text = $"*{v.ServiceName} - {v.ServiceDescription}*\n{v.SummarizedCost.ToJpyStyleString()}"
+            })
+            .ToArray<TextObject>();
+
+        var blocks = new List<Block>
         {
-            Blocks =
-            [
-                new SectionBlock()
-                {
-                    Text = new Markdown { Text = characterService.GetGreetingMessage(totalCost, projectId) },
-                    Expand = true
-                },
-                new DividerBlock(),
-                new SectionBlock()
-                {
-                    Expand = false,
-                    Text = new Markdown { Text = characterService.GetAttachmentText() },
-                    Fields = costSummaries
-                        .Where(v => v.SummarizedCost >= 1.0m)
-                        .Select(v => new Markdown
-                        {
-                            Text =
-                                $"*{v.ServiceName} - {v.ServiceDescription}*\n{v.SummarizedCost.ToJpyStyleString()}"
-                        })
-                        .ToArray<TextObject>()
-                },
-                new ContextBlock()
-                {
-                    Elements =
-                    [
-                        new Markdown { Text = characterService.GetFooterText() }
-                    ]
-                },
-                new ActionsBlock()
-                {
-                    Elements =
-                    [
-                        new Button()
-                        {
-                            Text = "請求コンソールを見る",
-                            Url =
-                                $"https://console.cloud.google.com/billing/linkedaccount?project={projectId}"
-                        }
-                    ]
-                }
-            ]
-        }, cancellationToken);
+            new SectionBlock()
+            {
+                Text = new Markdown { Text = characterService.GetGreetingMessage(totalCost, projectId) },
+                Expand = true
+            },
+            new DividerBlock(),
+            new SectionBlock()
+            {
+                Expand = false, Text = new Markdown { Text = characterService.GetAttachmentText() }
+            }
+        };
+
+        // Split fields into chunks of 10 and create SectionBlocks
+        blocks.AddRange(
+            filteredCostSummaries
+                .Chunk(10)
+                .Select(chunk => new SectionBlock() { Expand = false, Fields = chunk })
+        );
+
+        blocks.AddRange([
+            new ContextBlock()
+            {
+                Elements =
+                [
+                    new Markdown { Text = characterService.GetFooterText() }
+                ]
+            },
+            new ActionsBlock()
+            {
+                Elements =
+                [
+                    new Button()
+                    {
+                        Text = "請求コンソールを見る",
+                        Url = $"https://console.cloud.google.com/billing/linkedaccount?project={projectId}"
+                    }
+                ]
+            }
+        ]);
+
+        await slack.PostToWebhook(slackWebhookUrl, new Message { Blocks = blocks }, cancellationToken);
 
         Log.SlackMessageSent(logger);
     }
