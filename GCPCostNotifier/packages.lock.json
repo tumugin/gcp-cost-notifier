@@ -42,9 +42,9 @@
       },
       "SlackNet": {
         "type": "Direct",
-        "requested": "[0.17.4, )",
-        "resolved": "0.17.4",
-        "contentHash": "UC3arQStHe23BFZ82mIheP3uEAcc9CrOvzkwfDntOo7Qpwfv5fFdhhAhua2lyQbsDahnPeRzg3q1YA8OH6YCog==",
+        "requested": "[0.17.5, )",
+        "resolved": "0.17.5",
+        "contentHash": "o4khXErxs8ybcXjexSr+c110iVMzKNH9yPNSU0U6xEe7yQBg6o5BLjRBUOWhD/86iy7HzwDH6oBTBRESslnnJQ==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Newtonsoft.Json": "13.0.3",
