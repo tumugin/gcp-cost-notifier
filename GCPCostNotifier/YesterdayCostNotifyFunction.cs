@@ -11,7 +11,8 @@ public class YesterdayCostNotifyFunction(
     ILogger<YesterdayCostNotifyFunction> logger,
     ICostQueryService costQueryService,
     ISlackNotifier slackNotifier,
-    IOptions<AppSetting> appSettings
+    IOptions<AppSetting> appSettings,
+    IGeminiService geminiService
 ) : ICloudEventFunction
 {
     public async Task HandleAsync(CloudEvent cloudEvent, CancellationToken cancellationToken)
@@ -29,6 +30,29 @@ public class YesterdayCostNotifyFunction(
             losAngelesTimeZone,
             cancellationToken
         );
+
+        // Geminiによる更に前の日のデータを取得して比較する場合の処理
+        if (appSettings.Value.UseGeminiOutput)
+        {
+            Log.GeminiOutputEnabled(logger);
+            var dayBeforeYesterdayTargetDateTimeOffset =
+                TimeZoneInfo.ConvertTime(DateTimeOffset.Now.AddDays(-1), losAngelesTimeZone);
+            var dayBeforeYesterdayResults = await costQueryService.GetYesterdayCostSummaryAsync(
+                dayBeforeYesterdayTargetDateTimeOffset,
+                losAngelesTimeZone,
+                cancellationToken
+            );
+            var geminiResponse = await geminiService.GetGeminiResponseAsync(
+                results,
+                dayBeforeYesterdayResults,
+                appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,
+                cancellationToken
+            );
+            await slackNotifier.PostMessageAsync(geminiResponse, cancellationToken);
+
+            return;
+        }
+
         await slackNotifier.NotifyDailyResultAsync(
             results,
             appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,
