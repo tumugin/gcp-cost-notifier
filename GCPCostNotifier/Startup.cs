@@ -48,6 +48,7 @@ public class Startup : FunctionsStartup
                 var appSettings = v.GetRequiredService<IOptions<AppSetting>>().Value;
                 return new GeminiService(
                     geminiApiKey: appSettings.GeminiApiKey,
+                    geminiModelName: appSettings.GeminiModelName,
                     characterService: v.GetRequiredService<ICharacterService>(),
                     logger: v.GetRequiredService<ILogger<GeminiService>>()
                 );

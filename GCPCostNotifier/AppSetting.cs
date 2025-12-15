@@ -17,4 +17,5 @@ public class AppSetting
     public bool UseGeminiOutput { get; init; }
 
     public string? GeminiApiKey { get; init; }
+    public string GeminiModelName { get; init; } = "gemini-2.5-flash";
 }

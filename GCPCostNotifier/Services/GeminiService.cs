@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 public class GeminiService(
     string? geminiApiKey,
+    string geminiModelName,
     ICharacterService characterService,
     ILogger<GeminiService> logger
 ) : IGeminiService
@@ -35,7 +36,7 @@ public class GeminiService(
 
         await using var client = new Client(apiKey: geminiApiKey);
         var result = await client.Models.GenerateContentAsync(
-            "gemini-2.5-flash",
+            geminiModelName,
             prompt
         );
 
