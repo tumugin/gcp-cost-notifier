@@ -6,4 +6,5 @@ public interface ICharacterService
     public string GetAttachmentText();
     public string GetFooterText();
     public string GetColor();
+    public string GetGeminiPrompt();
 }

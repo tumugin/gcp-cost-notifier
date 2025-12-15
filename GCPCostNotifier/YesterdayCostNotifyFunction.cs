@@ -29,6 +29,20 @@ public class YesterdayCostNotifyFunction(
             losAngelesTimeZone,
             cancellationToken
         );
+
+        // Geminiによる更に前の日のデータを取得して比較する場合の処理
+        if (appSettings.Value.UseGeminiOutput)
+        {
+            Log.GeminiOutputEnabled(logger);
+            var dayBeforeYesterdayTargetDateTimeOffset =
+                TimeZoneInfo.ConvertTime(DateTimeOffset.Now.AddDays(-1), losAngelesTimeZone);
+            var dayBeforeYesterdayResults = await costQueryService.GetYesterdayCostSummaryAsync(
+                targetDateTimeOffset,
+                losAngelesTimeZone,
+                cancellationToken
+            );
+        }
+
         await slackNotifier.NotifyDailyResultAsync(
             results,
             appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,

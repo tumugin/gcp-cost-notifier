@@ -37,4 +37,7 @@ public static partial class Log
 
     [LoggerMessage(message: "Slack message sent.", level: LogLevel.Information)]
     public static partial void SlackMessageSent(ILogger logger);
+
+    [LoggerMessage(message: "Gemini output enabled. Fetching additional data for comparison.", level: LogLevel.Information)]
+    public static partial void GeminiOutputEnabled(ILogger logger);
 }

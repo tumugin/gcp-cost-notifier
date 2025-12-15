@@ -86,4 +86,25 @@ public class SlackNotifier(
 
         Log.SlackMessageSent(logger);
     }
+
+    public async Task PostMessageAsync(string messageMarkdown, CancellationToken cancellationToken)
+    {
+        var slack = this.CreateSlackApiClient();
+
+        Log.SendingSlackMessage(logger);
+
+        await slack.PostToWebhook(
+            slackWebhookUrl,
+            new Message
+            {
+                Blocks =
+                [
+                    new SectionBlock { Text = new Markdown { Text = messageMarkdown }, Expand = true },
+                ]
+            },
+            cancellationToken
+        );
+
+        Log.SlackMessageSent(logger);
+    }
 }
