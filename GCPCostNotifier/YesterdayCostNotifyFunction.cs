@@ -38,7 +38,7 @@ public class YesterdayCostNotifyFunction(
             var dayBeforeYesterdayTargetDateTimeOffset =
                 TimeZoneInfo.ConvertTime(DateTimeOffset.Now.AddDays(-1), losAngelesTimeZone);
             var dayBeforeYesterdayResults = await costQueryService.GetYesterdayCostSummaryAsync(
-                targetDateTimeOffset,
+                dayBeforeYesterdayTargetDateTimeOffset,
                 losAngelesTimeZone,
                 cancellationToken
             );
@@ -49,6 +49,8 @@ public class YesterdayCostNotifyFunction(
                 cancellationToken
             );
             await slackNotifier.PostMessageAsync(geminiResponse, cancellationToken);
+
+            return;
         }
 
         await slackNotifier.NotifyDailyResultAsync(
