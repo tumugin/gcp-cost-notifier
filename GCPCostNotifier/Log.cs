@@ -40,4 +40,10 @@ public static partial class Log
 
     [LoggerMessage(message: "Gemini output enabled. Fetching additional data for comparison.", level: LogLevel.Information)]
     public static partial void GeminiOutputEnabled(ILogger logger);
+
+    [LoggerMessage(message: "Generating Gemini output for further comparison.", level: LogLevel.Information)]
+    public static partial void GeneratingGeminiOutput(ILogger logger);
+
+    [LoggerMessage(message: "Gemini output generated.", level: LogLevel.Information)]
+    public static partial void GeminiOutputGenerated(ILogger logger);
 }
