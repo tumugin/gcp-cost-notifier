@@ -42,6 +42,15 @@ public class Startup : FunctionsStartup
                     v.GetRequiredService<ICharacterService>(),
                     v.GetRequiredService<ILogger<SlackNotifier>>()
                 );
+            })
+            .AddScoped<IGeminiService, GeminiService>(v =>
+            {
+                var appSettings = v.GetRequiredService<IOptions<AppSetting>>().Value;
+                return new GeminiService(
+                    geminiApiKey: appSettings.GeminiApiKey,
+                    characterService: v.GetRequiredService<ICharacterService>(),
+                    logger: v.GetRequiredService<ILogger<GeminiService>>()
+                );
             });
         base.ConfigureServices(context, services);
     }

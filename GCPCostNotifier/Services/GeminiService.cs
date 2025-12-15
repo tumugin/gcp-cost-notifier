@@ -4,7 +4,7 @@ using Google.GenAI;
 using Microsoft.Extensions.Logging;
 
 public class GeminiService(
-    string geminiApiKey,
+    string? geminiApiKey,
     ICharacterService characterService,
     ILogger<GeminiService> logger
 ) : IGeminiService

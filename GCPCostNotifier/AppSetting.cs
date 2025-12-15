@@ -15,4 +15,6 @@ public class AppSetting
     public string? BillingTargetProjectId { get; init; }
 
     public bool UseGeminiOutput { get; init; }
+
+    public string? GeminiApiKey { get; init; }
 }
