@@ -39,7 +39,7 @@ jobs:
             type=sha,prefix=sha-
 
       - name: Setup Pack CLI
-        uses: buildpacks/github-actions/setup-pack@v5.9.6
+        uses: buildpacks/github-actions/setup-pack@v5.10.0
 
       - name: Build with Cloud Native Buildpacks
         run: |

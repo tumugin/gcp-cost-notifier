@@ -246,8 +246,8 @@
       },
       "NodaTime": {
         "type": "Transitive",
-        "resolved": "3.2.2",
-        "contentHash": "dmju5W0UYC3QP/UJM0juKAZkH0HSDMp0gH91A0+mT9M0kgyM2Jm67hUZPl/WRQLq8Lijjqmdk8kyAViWFWM7dA=="
+        "resolved": "3.2.3",
+        "contentHash": "FNRoHeMMeF2BcFY95EnbB4BuPnG38Eb01+8j1l4atN0qdkxoGQtZMRqImd2YyUvjAoR82wp1H3cWFea4mpP1Hg=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -349,8 +349,8 @@
       },
       "SlackNet": {
         "type": "Transitive",
-        "resolved": "0.17.5",
-        "contentHash": "o4khXErxs8ybcXjexSr+c110iVMzKNH9yPNSU0U6xEe7yQBg6o5BLjRBUOWhD/86iy7HzwDH6oBTBRESslnnJQ==",
+        "resolved": "0.17.8",
+        "contentHash": "gqLREN+zwHa09PdD0a1anovaqnd6Uzp+kkxMPJFgfSy5K/KzP/CAkvYcklG37tT+YbMPJuk0tv1gujLj3Dj4Kg==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Newtonsoft.Json": "13.0.3",
@@ -847,8 +847,8 @@
           "Google.Cloud.BigQuery.V2": "[3.11.0, )",
           "Google.Cloud.Functions.Hosting": "[3.0.1, )",
           "Newtonsoft.Json": "[13.0.4, )",
-          "NodaTime": "[3.2.2, )",
-          "SlackNet": "[0.17.5, )",
+          "NodaTime": "[3.2.3, )",
+          "SlackNet": "[0.17.8, )",
           "System.Net.Http": "[4.3.4, )",
           "System.Text.RegularExpressions": "[4.3.1, )"
         }

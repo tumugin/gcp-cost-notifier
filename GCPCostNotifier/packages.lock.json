@@ -36,15 +36,15 @@
       },
       "NodaTime": {
         "type": "Direct",
-        "requested": "[3.2.2, )",
-        "resolved": "3.2.2",
-        "contentHash": "dmju5W0UYC3QP/UJM0juKAZkH0HSDMp0gH91A0+mT9M0kgyM2Jm67hUZPl/WRQLq8Lijjqmdk8kyAViWFWM7dA=="
+        "requested": "[3.2.3, )",
+        "resolved": "3.2.3",
+        "contentHash": "FNRoHeMMeF2BcFY95EnbB4BuPnG38Eb01+8j1l4atN0qdkxoGQtZMRqImd2YyUvjAoR82wp1H3cWFea4mpP1Hg=="
       },
       "SlackNet": {
         "type": "Direct",
-        "requested": "[0.17.5, )",
-        "resolved": "0.17.5",
-        "contentHash": "o4khXErxs8ybcXjexSr+c110iVMzKNH9yPNSU0U6xEe7yQBg6o5BLjRBUOWhD/86iy7HzwDH6oBTBRESslnnJQ==",
+        "requested": "[0.17.8, )",
+        "resolved": "0.17.8",
+        "contentHash": "gqLREN+zwHa09PdD0a1anovaqnd6Uzp+kkxMPJFgfSy5K/KzP/CAkvYcklG37tT+YbMPJuk0tv1gujLj3Dj4Kg==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Newtonsoft.Json": "13.0.3",
