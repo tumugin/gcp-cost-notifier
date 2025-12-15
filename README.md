@@ -4,6 +4,10 @@
 
 GCPの前日分の確定された利用料金をSlackにお知らせしてくれるCloud Functionsです。
 
+## 要件
+
+- .NET 10.0 以上
+
 ## キャラクター機能
 
 このアプリケーションは2つのキャラクターから選択できます：
@@ -15,10 +19,19 @@ GCPの前日分の確定された利用料金をSlackにお知らせしてくれ
 
 ## 設定(環境変数)
 
+### 必須設定
+
 - `AppSettings__ProjectId` : GCPのプロジェクトID
 - `AppSettings__SlackWebhookUrl` : 送信先のSlackのWebhook URL
 - `AppSettings__TargetTableName` : 抽出元のBigQueryのテーブル名
+
+### オプション設定
+
 - `AppSettings__Character` : 使用するキャラクター（"Mayuri"または"Chia"、省略時は"Mayuri"）
+- `AppSettings__BillingTargetProjectId` : 課金対象のプロジェクトIDを指定する場合に設定
+- `AppSettings__UseGeminiOutput` : Geminiによる出力を使用する場合は`true`を設定（デフォルト: `false`）
+- `AppSettings__GeminiApiKey` : Gemini APIキー（`UseGeminiOutput`が`true`の場合に必要）
+- `AppSettings__GeminiModelName` : 使用するGeminiモデル名（デフォルト: `gemini-2.5-flash`）
 - `DOTNET_ENVIRONMENT` : デバッグでない限り`Production`を指定
 - `DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP3SUPPORT` : (WORKAROUND) `false`を指定。Cloud Functionsでは上手くHTTP/3が動作しないため。
   - https://github.com/dotnet/runtime/issues/94794 を参照
@@ -52,7 +65,10 @@ dotnet run
     "ProjectId": "your-gcp-project-id",
     "SlackWebhookUrl": "your-slack-webhook-url",
     "TargetTableName": "your-bigquery-table-name",
-    "Character": "Mayuri"
+    "Character": "Mayuri",
+    "UseGeminiOutput": false,
+    "GeminiApiKey": "your-gemini-api-key",
+    "GeminiModelName": "gemini-2.5-flash"
   }
 }
 ```
@@ -131,6 +147,19 @@ resource "google_cloud_run_v2_service" "cost_notification_service" {
         // Set character "Mayuri" or "Chia" (default: "Mayuri")
         value = "Mayuri"
       }
+      // Optional: Enable Gemini output
+      // env {
+      //   name  = "AppSettings__UseGeminiOutput"
+      //   value = "true"
+      // }
+      // env {
+      //   name  = "AppSettings__GeminiApiKey"
+      //   value = "your-gemini-api-key"
+      // }
+      // env {
+      //   name  = "AppSettings__GeminiModelName"
+      //   value = "gemini-2.5-flash"
+      // }
 
       resources {
         limits = {
