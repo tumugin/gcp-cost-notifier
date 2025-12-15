@@ -35,7 +35,7 @@ public class GeminiService(
 
         await using var client = new Client(apiKey: geminiApiKey);
         var result = await client.Models.GenerateContentAsync(
-            "gemini-3-pro-preview",
+            "gemini-2.5-pro",
             prompt
         );
 
