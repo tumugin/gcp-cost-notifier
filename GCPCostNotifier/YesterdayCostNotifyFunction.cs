@@ -17,6 +17,11 @@ public class YesterdayCostNotifyFunction(
 {
     public async Task HandleAsync(CloudEvent cloudEvent, CancellationToken cancellationToken)
     {
+        if (!cloudEvent.IsValid)
+        {
+            return;
+        }
+
         // NOTE: GCPの課金データはロサンゼルス標準時で提供され、かつ、夏時間の影響を受ける
         var losAngelesTimeZone = TimeZoneInfo.FindSystemTimeZoneById("America/Los_Angeles");
         var targetDateTimeOffset = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, losAngelesTimeZone);
