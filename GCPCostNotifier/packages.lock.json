@@ -51,11 +51,10 @@
       },
       "SlackNet": {
         "type": "Direct",
-        "requested": "[0.17.8, )",
-        "resolved": "0.17.8",
-        "contentHash": "gqLREN+zwHa09PdD0a1anovaqnd6Uzp+kkxMPJFgfSy5K/KzP/CAkvYcklG37tT+YbMPJuk0tv1gujLj3Dj4Kg==",
+        "requested": "[0.17.9, )",
+        "resolved": "0.17.9",
+        "contentHash": "CE3RveMhPEu/QHdmE25NPtjt41h7LIBkQtZB274VdbHtD41vzPlWZVhPpJRLWytJRBDKo5zmyvVstgkUgo6mWQ==",
         "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Newtonsoft.Json": "13.0.3",
           "System.Reactive": "6.0.1"
         }
@@ -145,8 +144,8 @@
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw=="
+        "resolved": "6.0.0",
+        "contentHash": "UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg=="
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
