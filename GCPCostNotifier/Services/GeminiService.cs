@@ -18,17 +18,23 @@ public class GeminiService(
     )
     {
         var prompt = characterService.GetGeminiPrompt();
-        var costResultString = $"プロジェクトID {projectId} の昨日のコストの詳細:\n";
+        var yesterdayTotal = costSummariesYesterday.Select(v => v.SummarizedCost).Sum();
+        var costResultString = $"プロジェクトID {projectId} の昨日のコスト({yesterdayTotal} JPY)の詳細:\n";
         foreach (var summary in costSummariesYesterday)
         {
             costResultString += $"- {summary.ServiceName}: {summary.SummarizedCost} JPY\n";
         }
 
-        costResultString += "\n----------\n一昨日のコストの詳細:\n";
+        var dayBeforeYesterdayTotal = costSummariesDayBeforeYesterday.Select(v => v.SummarizedCost).Sum();
+        costResultString += $"\n----------\n一昨日のコスト({dayBeforeYesterdayTotal} JPY)の詳細:\n";
         foreach (var summary in costSummariesDayBeforeYesterday)
         {
             costResultString += $"- {summary.ServiceName}: {summary.SummarizedCost} JPY\n";
         }
+
+        var totalDiff = yesterdayTotal - dayBeforeYesterdayTotal;
+        costResultString +=
+            $"\n----------\n昨日のコストは一昨日と比べて {(totalDiff >= 0 ? "増加" : "減少")} しており、その差額は {totalDiff} JPY です。";
 
         prompt += "\n----------\n" + costResultString;
 
