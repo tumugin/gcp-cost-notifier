@@ -48,6 +48,7 @@ public class YesterdayCostNotifyFunction(
                 cancellationToken
             );
             var geminiResponse = await geminiService.GetGeminiResponseAsync(
+                DateTimeOffset.Now,
                 results,
                 dayBeforeYesterdayResults,
                 appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,
