@@ -3,7 +3,6 @@ namespace GCPCostNotifier.Services;
 using System.Globalization;
 using Google.GenAI;
 using Microsoft.Extensions.Logging;
-using NodaTime.Extensions;
 
 public class GeminiService(
     string? geminiApiKey,
