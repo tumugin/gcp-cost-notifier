@@ -40,6 +40,7 @@ public class YesterdayCostNotifyFunction(
         if (appSettings.Value.UseGeminiOutput)
         {
             Log.GeminiOutputEnabled(logger);
+            var tokyoTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Tokyo");
             var dayBeforeYesterdayTargetDateTimeOffset =
                 TimeZoneInfo.ConvertTime(DateTimeOffset.Now.AddDays(-1), losAngelesTimeZone);
             var dayBeforeYesterdayResults = await costQueryService.GetYesterdayCostSummaryAsync(
@@ -48,7 +49,7 @@ public class YesterdayCostNotifyFunction(
                 cancellationToken
             );
             var geminiResponse = await geminiService.GetGeminiResponseAsync(
-                DateTimeOffset.Now,
+                TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tokyoTimeZone),
                 results,
                 dayBeforeYesterdayResults,
                 appSettings.Value.BillingTargetProjectId ?? appSettings.Value.ProjectId,
