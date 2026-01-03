@@ -237,8 +237,8 @@
       },
       "NodaTime": {
         "type": "Transitive",
-        "resolved": "3.2.3",
-        "contentHash": "FNRoHeMMeF2BcFY95EnbB4BuPnG38Eb01+8j1l4atN0qdkxoGQtZMRqImd2YyUvjAoR82wp1H3cWFea4mpP1Hg=="
+        "resolved": "3.3.0",
+        "contentHash": "zmUEQPp9yXyGAqWSBhxfwdDhRh4EV04lvYn4P5bUb6dTz1m5AXTYaeSLQ447YLPI2Ge5VGFj20G2DWg5gtiXZg=="
       },
       "SlackNet": {
         "type": "Transitive",
@@ -274,7 +274,7 @@
           "Google.Cloud.Functions.Hosting": "[3.0.1, )",
           "Google.GenAI": "[0.9.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
-          "NodaTime": "[3.2.3, )",
+          "NodaTime": "[3.3.0, )",
           "SlackNet": "[0.17.9, )"
         }
       }
