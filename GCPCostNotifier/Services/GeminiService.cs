@@ -1,5 +1,6 @@
 namespace GCPCostNotifier.Services;
 
+using System.Globalization;
 using Google.GenAI;
 using Microsoft.Extensions.Logging;
 
@@ -11,6 +12,7 @@ public class GeminiService(
 ) : IGeminiService
 {
     public async Task<string> GetGeminiResponseAsync(
+        DateTimeOffset currentDateTime,
         IList<CostSummary> costSummariesYesterday,
         IList<CostSummary> costSummariesDayBeforeYesterday,
         string projectId,
@@ -36,7 +38,9 @@ public class GeminiService(
         costResultString +=
             $"\n----------\n昨日のコストは一昨日と比べて {(totalDiff >= 0 ? "増加" : "減少")} しており、その差額は {totalDiff} JPY です。";
 
-        prompt += "\n----------\n" + costResultString;
+        var currentDateString = "今日の日付は " + currentDateTime.ToString("o", CultureInfo.InvariantCulture) + " です。";
+
+        prompt += "\n----------\n" + currentDateString + "\n" + costResultString;
 
         Log.GeneratingGeminiOutput(logger);
 
