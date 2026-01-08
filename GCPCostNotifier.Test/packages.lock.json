@@ -32,9 +32,9 @@
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
-        "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "Fo++epLBWvuk7sOXbfglSGGI5+asxMr5v+cBxlEqd64YISeZiQO6W+QEkN3Ld6r0pGGuXWozzauLFqE4jPimUA==",
+        "requested": "[6.1.0, )",
+        "resolved": "6.1.0",
+        "contentHash": "H4zRIkiGyPa7RpApzXwan5vpZzu4ZDIzuKNlHFiDjOt5Irq4Y5j8r1SA7Oeo0yFCUyfiY7Jy2DTl8RnFZwpKNA==",
         "dependencies": {
           "Microsoft.Testing.Extensions.VSTestBridge": "2.0.2",
           "Microsoft.Testing.Platform.MSBuild": "2.0.2"
@@ -143,8 +143,8 @@
       },
       "Google.GenAI": {
         "type": "Transitive",
-        "resolved": "0.9.0",
-        "contentHash": "pTGMJhuOCTCMoxHQ4+tHNmWsPgQzSNZRQ6CAWMbUYjdmrpzB0N8QS7ciJU4oB7Q6yXA7QM+3ZC6WNjljL5/0wQ==",
+        "resolved": "0.10.0",
+        "contentHash": "abaTzK/56gHYvoeJ4ecEnzBWmVzpuxlCcfSvIKH6R28REZo0N4yCbSETUA6g7mrsQ96f7h7ZOkxvFKKDR798Nw==",
         "dependencies": {
           "Google.Apis.Auth": "1.69.0"
         }
@@ -237,8 +237,8 @@
       },
       "NodaTime": {
         "type": "Transitive",
-        "resolved": "3.2.3",
-        "contentHash": "FNRoHeMMeF2BcFY95EnbB4BuPnG38Eb01+8j1l4atN0qdkxoGQtZMRqImd2YyUvjAoR82wp1H3cWFea4mpP1Hg=="
+        "resolved": "3.3.0",
+        "contentHash": "zmUEQPp9yXyGAqWSBhxfwdDhRh4EV04lvYn4P5bUb6dTz1m5AXTYaeSLQ447YLPI2Ge5VGFj20G2DWg5gtiXZg=="
       },
       "SlackNet": {
         "type": "Transitive",
@@ -272,9 +272,9 @@
         "dependencies": {
           "Google.Cloud.BigQuery.V2": "[3.11.0, )",
           "Google.Cloud.Functions.Hosting": "[3.0.1, )",
-          "Google.GenAI": "[0.9.0, )",
+          "Google.GenAI": "[0.10.0, )",
           "Newtonsoft.Json": "[13.0.4, )",
-          "NodaTime": "[3.2.3, )",
+          "NodaTime": "[3.3.0, )",
           "SlackNet": "[0.17.9, )"
         }
       }
