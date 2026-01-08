@@ -24,9 +24,9 @@
       },
       "Google.GenAI": {
         "type": "Direct",
-        "requested": "[0.9.0, )",
-        "resolved": "0.9.0",
-        "contentHash": "pTGMJhuOCTCMoxHQ4+tHNmWsPgQzSNZRQ6CAWMbUYjdmrpzB0N8QS7ciJU4oB7Q6yXA7QM+3ZC6WNjljL5/0wQ==",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "abaTzK/56gHYvoeJ4ecEnzBWmVzpuxlCcfSvIKH6R28REZo0N4yCbSETUA6g7mrsQ96f7h7ZOkxvFKKDR798Nw==",
         "dependencies": {
           "Google.Apis.Auth": "1.69.0"
         }
@@ -45,9 +45,9 @@
       },
       "NodaTime": {
         "type": "Direct",
-        "requested": "[3.2.3, )",
-        "resolved": "3.2.3",
-        "contentHash": "FNRoHeMMeF2BcFY95EnbB4BuPnG38Eb01+8j1l4atN0qdkxoGQtZMRqImd2YyUvjAoR82wp1H3cWFea4mpP1Hg=="
+        "requested": "[3.3.0, )",
+        "resolved": "3.3.0",
+        "contentHash": "zmUEQPp9yXyGAqWSBhxfwdDhRh4EV04lvYn4P5bUb6dTz1m5AXTYaeSLQ447YLPI2Ge5VGFj20G2DWg5gtiXZg=="
       },
       "SlackNet": {
         "type": "Direct",
