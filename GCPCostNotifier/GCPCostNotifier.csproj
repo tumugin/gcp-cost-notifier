@@ -10,7 +10,7 @@
     <ItemGroup>
       <PackageReference Include="Google.Cloud.BigQuery.V2" Version="3.11.0" />
       <PackageReference Include="Google.Cloud.Functions.Hosting" Version="3.0.1" />
-      <PackageReference Include="Google.GenAI" Version="0.9.0" />
+      <PackageReference Include="Google.GenAI" Version="1.0.0" />
       <PackageReference Include="IDisposableAnalyzers" Version="4.0.8">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
