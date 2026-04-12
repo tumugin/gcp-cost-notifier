@@ -22,4 +22,13 @@ public class CharacterServiceFactoryTest
         Assert.That(service, Is.InstanceOf<ChiaCharacterService>());
         Assert.That(service.GetColor(), Is.EqualTo("#FFFFFF"));
     }
+
+    [Test]
+    public void CreateUniCharacterReturnsCorrectService()
+    {
+        var service = CharacterServiceFactory.Create(Character.Uni);
+
+        Assert.That(service, Is.InstanceOf<UniCharacterService>());
+        Assert.That(service.GetColor(), Is.EqualTo("#F5F0EB"));
+    }
 }
