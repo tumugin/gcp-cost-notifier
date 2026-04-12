@@ -47,7 +47,8 @@ public class GeminiService(
         await using var client = new Client(apiKey: geminiApiKey);
         var result = await client.Models.GenerateContentAsync(
             geminiModelName,
-            prompt
+            prompt,
+            cancellationToken: cancellationToken
         );
 
         Log.GeminiOutputGenerated(logger);
