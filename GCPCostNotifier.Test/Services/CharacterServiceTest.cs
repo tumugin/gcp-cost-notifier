@@ -88,4 +88,46 @@ public class CharacterServiceTest
 
         Assert.That(result, Is.EqualTo("#FFFFFF"));
     }
+
+    [Test]
+    public void UniCharacterServiceGetGreetingMessageReturnsCorrectMessage()
+    {
+        var service = new UniCharacterService();
+        var totalCost = 3000m;
+        var projectId = "uni-test-project";
+        var result = service.GetGreetingMessage(totalCost, projectId);
+
+        Assert.That(result, Does.Contain("うにちゃん"));
+        Assert.That(result, Does.Contain("￥3,000"));
+        Assert.That(result, Does.Contain("独り占めして分析しちゃう"));
+        Assert.That(result, Does.Contain(":sparkles:"));
+        Assert.That(result, Does.Contain("uni-test-project"));
+    }
+
+    [Test]
+    public void UniCharacterServiceGetAttachmentTextReturnsCorrectText()
+    {
+        var service = new UniCharacterService();
+        var result = service.GetAttachmentText();
+
+        Assert.That(result, Is.EqualTo("昨日のGoogle Cloudのコストの詳細だよ！（1円未満のものは省略しちゃったけど許してね！）"));
+    }
+
+    [Test]
+    public void UniCharacterServiceGetFooterTextReturnsCorrectText()
+    {
+        var service = new UniCharacterService();
+        var result = service.GetFooterText();
+
+        Assert.That(result, Is.EqualTo("コストを計算する雲丹うに"));
+    }
+
+    [Test]
+    public void UniCharacterServiceGetColorReturnsCorrectColor()
+    {
+        var service = new UniCharacterService();
+        var result = service.GetColor();
+
+        Assert.That(result, Is.EqualTo("#F5F0EB"));
+    }
 }

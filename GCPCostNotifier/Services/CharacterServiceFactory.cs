@@ -7,6 +7,7 @@ public static class CharacterServiceFactory
         {
             Character.Chia => new ChiaCharacterService(),
             Character.Mayuri => new MayuriCharacterService(),
+            Character.Uni => new UniCharacterService(),
             _ => throw new ArgumentOutOfRangeException(nameof(character))
         };
 }
