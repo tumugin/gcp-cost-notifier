@@ -1,5 +1,8 @@
 using GCPCostNotifier.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace GCPCostNotifier.Test.Services;
 
@@ -7,6 +10,7 @@ namespace GCPCostNotifier.Test.Services;
 public class SlackNotifierTest
 {
     private HttpClient _httpClient;
+    private RecordingWebhookHandler _handler;
     private ILogger<SlackNotifier> _logger;
     private ICharacterService _characterService;
     private const string TestWebhookUrl = "https://hooks.slack.com/services/test/test/test";
@@ -14,9 +18,9 @@ public class SlackNotifierTest
     [SetUp]
     public void Setup()
     {
-        var handler = new HttpClientHandler();
-        _httpClient = new HttpClient(handler);
-        _logger = new LoggerFactory().CreateLogger<SlackNotifier>();
+        _handler = new RecordingWebhookHandler();
+        _httpClient = new HttpClient(_handler, disposeHandler: false);
+        _logger = NullLogger<SlackNotifier>.Instance;
         _characterService = new MayuriCharacterService();
     }
 
@@ -24,6 +28,7 @@ public class SlackNotifierTest
     public void TearDown()
     {
         _httpClient?.Dispose();
+        _handler?.Dispose();
     }
 
     [Test]
@@ -72,7 +77,7 @@ public class SlackNotifierTest
     }
 
     [Test]
-    public void SlackNotifierNotifyDailyResultAsyncProcessesCostSummariesCorrectly()
+    public async Task SlackNotifierNotifyDailyResultAsyncProcessesCostSummariesCorrectly()
     {
         var costSummaries = new List<CostSummary>
         {
@@ -84,18 +89,36 @@ public class SlackNotifierTest
         var notifier = new SlackNotifier(TestWebhookUrl, _httpClient, _characterService, _logger);
         var projectId = "test-project";
 
-        Assert.DoesNotThrowAsync(async () =>
+        await notifier.NotifyDailyResultAsync(costSummaries, projectId, CancellationToken.None);
+
+        var payload = JObject.Parse(_handler.Body!);
+        var fields = payload["blocks"]!
+            .Where(block => block["fields"] is not null)
+            .SelectMany(block => block["fields"]!)
+            .Select(field => field["text"]!.Value<string>())
+            .ToList();
+        Assert.That(fields, Has.Count.EqualTo(2));
+        using (Assert.EnterMultipleScope())
         {
-            try
-            {
-                await notifier.NotifyDailyResultAsync(costSummaries, projectId, CancellationToken.None);
-            }
-            catch (HttpRequestException)
-            {
-                // Expected since we're using a fake webhook URL
-                // The important thing is that the method processes the parameters correctly
-                // without throwing any argument or formatting exceptions
-            }
-        });
+            Assert.That(_handler.RequestUri, Is.EqualTo(new Uri(TestWebhookUrl)));
+            Assert.That(fields[0], Does.Contain("Compute Engine"));
+            Assert.That(fields[1], Does.Contain("BigQuery"));
+            Assert.That(payload["blocks"]![0]!["text"]!["text"]!.Value<string>(),
+                Does.Contain(projectId).And.Contain("127"));
+        }
+    }
+
+    private sealed class RecordingWebhookHandler : HttpMessageHandler
+    {
+        public Uri? RequestUri { get; private set; }
+        public string? Body { get; private set; }
+
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            RequestUri = request.RequestUri;
+            Body = await request.Content!.ReadAsStringAsync(cancellationToken);
+            return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("ok") };
+        }
     }
 }

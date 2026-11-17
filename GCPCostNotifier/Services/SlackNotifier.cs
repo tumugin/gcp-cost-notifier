@@ -12,14 +12,10 @@ public class SlackNotifier(
     ILogger<SlackNotifier> logger
 ) : ISlackNotifier
 {
-    private SlackApiClient CreateSlackApiClient()
-    {
-        var jsonSettings = Default.JsonSettings(Default.SlackTypeResolver(Default.AssembliesContainingSlackTypes));
-        var http = Default.Http(jsonSettings, getHttpClient: () => httpClient);
-        var urlBuilder = Default.UrlBuilder(jsonSettings);
-
-        return new SlackApiClient(http, urlBuilder, jsonSettings, null);
-    }
+    private ISlackApiClient CreateSlackApiClient() =>
+        new SlackServiceBuilder()
+            .UseHttp(services => Default.Http(services.GetJsonSettings(), getHttpClient: () => httpClient))
+            .GetApiClient();
 
     public async Task NotifyDailyResultAsync(
         IList<CostSummary> costSummaries,

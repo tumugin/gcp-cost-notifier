@@ -6,7 +6,10 @@ GCPの前日分の確定された利用料金をSlackにお知らせしてくれ
 
 ## 要件
 
-- .NET 10.0 以上
+- .NET SDK 10.0.404（`global.json` を参照）
+- コンテナビルド: Google Cloud Buildpacks `google-24` と Pack CLI v0.40.11
+
+Google Cloud Buildpacks の現行安定版の[対応ランタイム](https://docs.cloud.google.com/docs/buildpacks/builders)のうち、最新の .NET は 10 系のため、.NET 11 への移行はビルダーの対応後に行います。
 
 ## キャラクター機能
 

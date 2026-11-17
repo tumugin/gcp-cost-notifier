@@ -19,10 +19,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Log in to Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -30,7 +30,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v6
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -39,18 +39,24 @@ jobs:
             type=sha,prefix=sha-
 
       - name: Setup Pack CLI
-        uses: buildpacks/github-actions/setup-pack@v5.12.0
+        uses: buildpacks/github-actions/setup-pack@0f33674a6e9aaddbdce74e58983bc1812871453e # v6.2.4
+        with:
+          pack-version: 0.40.11
 
-      - name: Build with Cloud Native Buildpacks
+      - name: Build and publish with Cloud Native Buildpacks
+        env:
+          IMAGE_TAGS: ${{ steps.meta.outputs.tags }}
         run: |
-          pack build ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-      - name: Push image and additional tags
-        run: |
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          for tag in $(echo '${{ steps.meta.outputs.tags }}' | tr '\n' ' '); do
-            if [ "$tag" != "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" ]; then
-              docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} $tag
-              docker push $tag
+          image="${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          args=()
+          while IFS= read -r tag; do
+            if [[ -n "$tag" && "$tag" != "$image" ]]; then
+              args+=(--tag "$tag")
             fi
-          done
+          done <<< "$IMAGE_TAGS"
+          pack build "$image" --publish "${args[@]}"
+
+      - name: Verify published runtime
+        run: |
+          docker run --rm --entrypoint /cnb/lifecycle/launcher \
+            "${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}" dotnet --info
