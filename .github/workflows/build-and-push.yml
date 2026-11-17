@@ -43,16 +43,20 @@ jobs:
         with:
           pack-version: 0.40.11
 
-      - name: Build with Cloud Native Buildpacks
+      - name: Build and publish with Cloud Native Buildpacks
+        env:
+          IMAGE_TAGS: ${{ steps.meta.outputs.tags }}
         run: |
-          pack build ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-      - name: Push image and additional tags
-        run: |
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          for tag in $(echo '${{ steps.meta.outputs.tags }}' | tr '\n' ' '); do
-            if [ "$tag" != "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" ]; then
-              docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} $tag
-              docker push $tag
+          image="${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          args=()
+          while IFS= read -r tag; do
+            if [[ -n "$tag" && "$tag" != "$image" ]]; then
+              args+=(--tag "$tag")
             fi
-          done
+          done <<< "$IMAGE_TAGS"
+          pack build "$image" --publish "${args[@]}"
+
+      - name: Verify published runtime
+        run: |
+          docker run --rm --entrypoint /cnb/lifecycle/launcher \
+            "${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}" dotnet --info
